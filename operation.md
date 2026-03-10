@@ -71,6 +71,7 @@ There are two files at `ansible/environments/<project>/inventory`:
 - `vars.yml`: All BAP configurations
 
 This is the `vars.yml` file (the same for GCP or AWS), but only some parameters are shown:
+
 ```yaml
 all:
   vars:
@@ -130,11 +131,15 @@ all:
 You can find more info at https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/docs/deployment_and_config.md
 
 Steps to upgrade BAP versions (all commands must be executed under the `ansible` directory):
+
 1. Stop mordred container
+
    ```bash
    ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
    ```
+
 1. Update the BAP versions at `vars.yml`
+
    ```yaml
     # BAP versions
     bap_version: 0.38.1
@@ -143,9 +148,11 @@ Steps to upgrade BAP versions (all commands must be executed under the `ansible`
     sortinghat_version: 0.38.1
     sortinghat_worker_version: 0.38.1
    ```
+
 1. Comment out the services that you don't want to upgrade from `all_in_one.yml`.
    Normally, `mariadb`, `redis`, and `monitoring` do not upgrade their versions.
    **IMPORTANT**: When you upgrade `sortinghat`, you must run `nginx` too.
+
    ```yaml
    - hosts: all_in_one
      roles:
@@ -160,32 +167,106 @@ Steps to upgrade BAP versions (all commands must be executed under the `ansible`
        #- monitoring
      become: true
    ```
+
 1. Run the playbooks to apply the new versions:
+
    ```bash
    ansible-playbook -i environments/<project>/inventory playbook/all_in_one.yml
    ```
 
 # Mordred
 
+Depends on which kind of infrastructure you have the mordred container in the `all-in-one` or in a separated node `mordred-0`, but the steps to check the issues and/or restart the mordred container are the same.
+
 How to apply when you update the Mordred `setup.cfg` file.
 
 1. On the `control-node`
    1. stop the mordred container
+
       ```bash
       ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
       ```
-1. On the `all-in-one`:
+
+1. On the `all-in-one` or `mordred-0` node depends on your infrastructure:
    1. Change to sudo `sudo su`
-   1. Update `/docker/mordred/setups/<project>/setup.cfg`
+   1. Update `setup.cfg`
+
       ```bash
       cd /docker/mordred/setups
       git pull origin main
       ```
+
    1. Get the mordred container
+
       ```bash
       docker ps -a | grep mordred
       ```
+
    1. Start the mordred container
+
       ```bash
       docker start <container_name | container_ID>
+      ```
+
+## Common Issues
+
+**IMPORTANT**: When you update the `setup.cfg` file, you must restart the
+mordred container, but if you update the `projects.json` file, mordred will
+automatically pull the changes and update the index, so you don't need to
+restart the mordred container.
+
+### The index is not updated
+
+If the index is not updated, you can check the logs to find out the issue at
+`/docker/mordred/instances/test/logs/all.log`.
+
+- For example, if you want to see the logs of the `git` thread, you can filter
+ the logs with `grep`:
+
+```bash
+root@all-in-one-0:~# cd /docker/mordred/instances/test/logs
+root@all-in-one-0:/docker/mordred/instances/test/logs# cat all.log | grep -v autorefresh | grep git] | tail
+```
+
+Maybe you don't have permissions to clone the repository or it does not exist.
+
+### Unhealthy mordred container
+
+If the mordred container is unhealthy, you can check the logs to find out the
+issue at `/docker/mordred/instances/test/logs/all.log`.
+
+```bash
+root@all-in-one-0:~# docker ps
+
+CONTAINER ID   IMAGE                                COMMAND                  CREATED       STATUS                    PORTS     NAMES
+969a90b912a1   bitergia/bitergia-analytics:0.37.0   "/bin/sh -c ${DEPLOY…"   3 weeks ago   Up 22 hours (unhealthy)             mordred_test
+```
+
+When the mordred container is unhealthy, is because the Task Manager is not
+able to connect to OpenSearch, and the thread will be stop, in this case the
+`github2:issue` and `git` threads.
+
+```bash
+root@bitergio-mordred-1:/docker/mordred/instances/sta/logs# cat all.log | grep ERROR | grep "Task Manager"
+
+2026-03-09 15:30:30,394 - Test - sirmordred.task_manager - ERROR - [github2:issue] Exception in Task Manager 500 Server Error: Internal Server Error for url: https://bap-opensearch-manager-0:9200/bap_test_github2-issue_260122_enriched_260122/_update_by_query?wait_for_completion=true&conflicts=proceed
+
+2026-03-09 15:30:37,333 - Test - sirmordred.task_manager - ERROR - [git] Exception in Task Manager TransportError(500, 'search_phase_execution_exception', 'node [cv1rlvDRSd6SwWdm8vPJrx] is not available')
+```
+
+To solve this issue, you can restart the mordred container.
+
+1. On the `control-node`
+   1. stop the mordred container
+
+      ```bash
+      ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
+      ```
+
+1. On the `all-in-one` or `mordred-0` node depends on your infrastructure:
+   1. Change to sudo `sudo su`
+   1. Start the mordred container
+
+      ```bash
+      docker start mordred_test
       ```
