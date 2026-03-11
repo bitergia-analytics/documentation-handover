@@ -2,7 +2,7 @@
 
 - [Mordred](#mordred)
     - [Unhealthy mordred container](#unhealthy-mordred-container)
-    - [The index is not updated](#the-index-is-not-updated)
+    - [Missing or outdated data](#missing-or-outdated-data)
     - [Pontoon session id expired](#pontoon-session-id-expired)
         - [Obtaining the Session ID](#obtaining-the-session-id)
         - [Using the Session ID](#using-the-session-id)
@@ -14,8 +14,8 @@
 
 ### Unhealthy mordred container
 
-If the mordred container is unhealthy, you can check the logs to find out the
-issue at `/docker/mordred/instances/test/logs/all.log`.
+To check if a container is unhealthy, use `docker ps` and look at the STATUS column. 
+An unhealthy container will show "(unhealthy)" in its status, as shown in the example below.
 
 ```bash
 root@all-in-one-0:~# docker ps
@@ -24,7 +24,10 @@ CONTAINER ID   IMAGE                                COMMAND                  CRE
 969a90b912a1   bitergia/bitergia-analytics:0.37.0   "/bin/sh -c ${DEPLOY…"   3 weeks ago   Up 22 hours (unhealthy)             mordred_test
 ```
 
-When the Mordred container is unhealthy, it is because the Task Manager is not
+If the mordred container is unhealthy, you can check the logs to find out the
+issue at `/docker/mordred/instances/test/logs/all.log`.
+
+When the Mordred container is unhealthy, it is often because the Task Manager is not
 able to connect to OpenSearch, and the thread will be stopped. In this case, the
 `github2:issue` and `git` threads.
 
@@ -53,9 +56,10 @@ To solve this issue, you can restart the mordred container.
       docker start mordred_test
       ```
 
-### The index is not updated
+### Missing or outdated data
 
-If the index is not updated, you can check the logs to find out the issue at
+If data is missing from your dashboards or the dashboards are not showing the
+latest data from your repositories, you can check the logs to find out the issue at
 `/docker/mordred/instances/test/logs/all.log`.
 
 - For example, if you want to see the logs of the `git` thread, you can filter
@@ -65,8 +69,6 @@ If the index is not updated, you can check the logs to find out the issue at
 root@all-in-one-0:~# cd /docker/mordred/instances/test/logs
 root@all-in-one-0:/docker/mordred/instances/test/logs# cat all.log | grep -v autorefresh | grep git] | tail
 ```
-
-This could be due to insufficient permissions to clone the repository or because the repository does not exist.
 
 ### Pontoon session id expired
 

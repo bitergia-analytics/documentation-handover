@@ -1,10 +1,10 @@
 # Bitergia Analytics Documentation Handover
 
-Welcome to the comprehensive documentation for Bitergia Analytics Platform (BAP). This repository contains essential guides for operating, configuring, and troubleshooting the BAP infrastructure.
+Welcome to the documentation for Bitergia Analytics Platform (BAP). This repository contains essential guides for operating, configuring, and troubleshooting the BAP infrastructure.
 
 ## Platform Overview
 
-The Bitergia Analytics Platform (BAP) is a comprehensive software development analytics solution built on [GrimoireLab](https://chaoss.github.io/grimoirelab/). It provides organizations with powerful insights into their development processes through data collection, enrichment, and visualization.
+The Bitergia Analytics Platform (BAP) is a software development analytics solution built on [GrimoireLab](https://chaoss.github.io/grimoirelab/). It provides organizations with powerful insights into their development processes through data collection, enrichment, and visualization.
 
 **Core Architecture:**
 - **Data Collection Layer**: Perceval collects raw data from various sources (Git, GitHub, GitLab, Jira, etc.)
@@ -78,7 +78,7 @@ Solutions for common issues and error scenarios in the BAP environment.
 
 - [Mordred](troubleshooting.md#mordred)
   - [Unhealthy Mordred Container](troubleshooting.md#unhealthy-mordred-container) - Diagnosing and fixing container health issues
-  - [The index is not updated](troubleshooting.md#the-index-is-not-updated) - Troubleshooting index update problems
+  - [Missing or Outdated Data](troubleshooting.md#missing-or-outdated-data) - Troubleshooting data collection and update problems
   - [Pontoon Session ID Expired](troubleshooting.md#pontoon-session-id-expired) - Handling authentication issues with Mozilla Pontoon
     - [Obtaining the Session ID](troubleshooting.md#obtaining-the-session-id)
     - [Using the Session ID](troubleshooting.md#using-the-session-id)
@@ -93,11 +93,3 @@ Solutions for common issues and error scenarios in the BAP environment.
 - [Bitergia Backends](https://github.com/bitergia-analytics/bitergia-analytics-elk-backends) - Custom data source backends
 - [OpenSearch](https://docs.opensearch.org/) - Official OpenSearch documentation
 - [BAP End-User Documentation](https://bap.bitergia.com/) - Comprehensive guides for platform users
-
-## 📋 Quick Start
-
-1. **Infrastructure Setup**: Start with the [Operation Guide](operation.md) to provision and deploy your BAP instance
-2. **Data Configuration**: Use the [Mordred Configuration](mordred_configuration.md) guide to configure your data sources
-3. **User Setup**: Follow the [User Management Manual](user_management.md) to create users and set permissions
-4. **Issue Resolution**: Reference the [Troubleshooting Guide](troubleshooting.md) when problems arise
-5. **Platform Usage**: Review the [BAP End-User Documentation](https://bap.bitergia.com/) to learn how to use SortingHat and OpenSearch effectively

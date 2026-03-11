@@ -1,5 +1,11 @@
 # Mordred configuration
 
+Mordred is the orchestrator component of GrimoireLab that coordinates the entire
+data pipeline for software development analytics. It manages the collection of raw
+data from various sources (Git repositories, GitHub issues, pull requests, etc.),
+enriches this data with additional metrics, and uses SortingHat to unify contributor
+information across different data sources.
+
 GrimoireLab supports many datasources, but this guide will focus on examples for Git and GitHub. For complete documentation on all supported datasources and configuration options, refer to the [SirMordred documentation](https://github.com/chaoss/grimoirelab-sirmordred?tab=readme-ov-file#sirmordred---) and 
 [Bitergia backends](https://github.com/bitergia-analytics/bitergia-analytics-elk-backends/blob/main/README.md).
 
@@ -13,8 +19,6 @@ GrimoireLab supports many datasources, but this guide will focus on examples for
 
 Mordred uses a configuration file (`setup.cfg`) to define the datasources to analyze and their parameters.
 It is available under `/docker/mordred/setups/`.
-
-The configuration file is organized into multiple sections: general configuration sections (`general`, `projects`, `es_collection`, `es_enrichment`, `sortinghat`, and `phases`), and datasource specific sections (backends and studies).
 
 The configuration file is organized into multiple sections:
 - **[general]**: Basic setup (debug mode, logs)

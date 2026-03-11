@@ -1,8 +1,10 @@
 # Operation
 
-This guide explains how to create infrastructure using the BAP ([Bitergia Analytics Platform](https://github.com/bitergia-analytics/bap-deployment-toolkit)).
+This guide explains how to create infrastructure using the BAP ([Bitergia Analytics Platform Toolkit](https://github.com/bitergia-analytics/bap-deployment-toolkit)) and some of the basic actions to operate the platform.
 
 All paths are referenced from the clone of `bap-deployment-toolkit` directory.
+
+> **Note**: This guide provides a quick reference for common operations. For comprehensive documentation, including detailed setup instructions, and advanced configurations, please refer to the [BAP Deployment Toolkit documentation](https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/README.md).
 
 
 ## Table of Contents
@@ -205,7 +207,7 @@ How to apply changes when you update the Mordred `setup.cfg` file:
       ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
       ```
 
-1. On the `all-in-one-0` or `mordred-0` node (depending on your infrastructurere):
+1. On the `all-in-one-0` or `mordred-0` node (depending on your infrastructure):
    1. Switch to sudo `sudo su`
    1. Update `setup.cfg`
 

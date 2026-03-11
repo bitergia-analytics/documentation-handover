@@ -13,8 +13,6 @@
     - [Add user](#add-user-1)
     - [Change password](#change-password)
     - [Delete user](#delete-user)
-  - [Index management](#index-management)
-    - [Custom indices](#custom-indices)
 
 ## SortingHat
 
@@ -24,9 +22,32 @@ All user management operations require first accessing the SortingHat container:
 docker exec -ti bap_sortinghat /bin/bash
 ```
 
+### About Multitenant Mode
+
+SortingHat can operate in two modes:
+
+- **Single-tenant mode (default)**: All users and data belong to a single
+organization. Most users will use this mode.
+- **Multitenant mode**: Multiple organizations (tenants) can be managed
+within the same SortingHat instance, with data isolation between them.
+This is typically used in enterprise or SaaS deployments.
+
+To determine whether your SortingHat instance is running in multitenant
+mode, check the `vars.yml` file in your Ansible configuration. You may
+find the variable `sortinghat_multi_tenant` set to `true` and, under
+`instances.sortinghat.tenant`, the name of the tenant.
+
+
 ### Add user
 
-Add a new user to SortingHat. If multitenant mode is enabled, users must be assigned to the related tenant.
+Add a new user to SortingHat.
+
+#### For single-tenant mode
+```bash
+/opt/venv/bin/sortinghat-admin create-user
+```
+
+#### For multitenant mode
 
 ```bash
 /opt/venv/bin/sortinghat-admin create-user
@@ -35,8 +56,14 @@ Add a new user to SortingHat. If multitenant mode is enabled, users must be assi
 
 ### Add admin user
 
-Add a new admin user to SortingHat. If multitenant mode is enabled, users must be assigned to the related tenant.
+Add a new admin user to SortingHat.
 
+#### For single-tenant mode
+```bash
+/opt/venv/bin/sortinghat-admin create-user --is-admin
+```
+
+#### For multitenant mode
 ```bash
 /opt/venv/bin/sortinghat-admin create-user --is-admin
 /opt/venv/bin/sortinghat-admin set-user-tenant <user> <tenant> <tenant>
@@ -59,12 +86,18 @@ user.delete()
 
 ### Change permissions
 
-Assign a role to a user in a specific tenant. Roles can be `user`, `admin`, or `readonly`.
+Assign a role to a user. Available roles:
 
 - `admin`: Full access (view, add, change, delete).
 - `user`: Full access except executing jobs and periodic tasks.
 - `readonly`: View-only access.
 
+#### For single-tenant mode
+```bash
+/opt/venv/bin/sortinghat-admin set-user-permissions <user> <role>
+```
+
+#### For multitenant mode
 ```bash
 /opt/venv/bin/sortinghat-admin set-user-permissions <user> <role> --tenant <tenant>
 ```
