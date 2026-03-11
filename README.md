@@ -73,18 +73,18 @@ Guides and tutorials for end users working with SortingHat and OpenSearch.
     - [SQL Queries](https://bap.bitergia.com/advanced/sql/) - Using SQL to query data
 
 
-### 🔧 [Troubleshooting Guide](throubleshooting.md)
+### 🔧 [Troubleshooting Guide](troubleshooting.md)
 Solutions for common issues and error scenarios in the BAP environment.
 
-- [Mordred](throubleshooting.md#mordred)
-  - [Unhealthy Mordred Container](throubleshooting.md#unhealthy-mordred-container) - Diagnosing and fixing container health issues
-  - [The index is not updated](throubleshooting.md#the-index-is-not-updated) - Troubleshooting index update problems
-  - [Pontoon Session ID Expired](throubleshooting.md#pontoon-session-id-expired) - Handling authentication issues with Mozilla Pontoon
-    - [Obtaining the Session ID](throubleshooting.md#obtaining-the-session-id)
-    - [Using the Session ID](throubleshooting.md#using-the-session-id)
-  - [Bugzillarest Error](throubleshooting.md#bugzillarest-error) - Resolving BugzillaREST API collection failures
-    - [Error in Logs](throubleshooting.md#error-in-logs)
-    - [Workaround](throubleshooting.md#workaround)
+- [Mordred](troubleshooting.md#mordred)
+  - [Unhealthy Mordred Container](troubleshooting.md#unhealthy-mordred-container) - Diagnosing and fixing container health issues
+  - [The index is not updated](troubleshooting.md#the-index-is-not-updated) - Troubleshooting index update problems
+  - [Pontoon Session ID Expired](troubleshooting.md#pontoon-session-id-expired) - Handling authentication issues with Mozilla Pontoon
+    - [Obtaining the Session ID](troubleshooting.md#obtaining-the-session-id)
+    - [Using the Session ID](troubleshooting.md#using-the-session-id)
+  - [Bugzillarest Error](troubleshooting.md#bugzillarest-error) - Resolving BugzillaREST API collection failures
+    - [Error in Logs](troubleshooting.md#error-in-logs)
+    - [Workaround](troubleshooting.md#workaround)
 
 ## 🔗 External Resources
 
@@ -99,5 +99,5 @@ Solutions for common issues and error scenarios in the BAP environment.
 1. **Infrastructure Setup**: Start with the [Operation Guide](operation.md) to provision and deploy your BAP instance
 2. **Data Configuration**: Use the [Mordred Configuration](mordred_configuration.md) guide to configure your data sources
 3. **User Setup**: Follow the [User Management Manual](user_management.md) to create users and set permissions
-4. **Issue Resolution**: Reference the [Troubleshooting Guide](throubleshooting.md) when problems arise
+4. **Issue Resolution**: Reference the [Troubleshooting Guide](troubleshooting.md) when problems arise
 5. **Platform Usage**: Review the [BAP End-User Documentation](https://bap.bitergia.com/) to learn how to use SortingHat and OpenSearch effectively

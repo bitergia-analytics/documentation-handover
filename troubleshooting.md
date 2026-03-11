@@ -1,4 +1,4 @@
-# Throubleshooting
+# Troubleshooting
 
 - [Mordred](#mordred)
     - [Unhealthy mordred container](#unhealthy-mordred-container)
@@ -24,8 +24,8 @@ CONTAINER ID   IMAGE                                COMMAND                  CRE
 969a90b912a1   bitergia/bitergia-analytics:0.37.0   "/bin/sh -c ${DEPLOY…"   3 weeks ago   Up 22 hours (unhealthy)             mordred_test
 ```
 
-When the mordred container is unhealthy, is because the Task Manager is not
-able to connect to OpenSearch, and the thread will be stop, in this case the
+When the Mordred container is unhealthy, it is because the Task Manager is not
+able to connect to OpenSearch, and the thread will be stopped. In this case, the
 `github2:issue` and `git` threads.
 
 ```bash
@@ -45,8 +45,8 @@ To solve this issue, you can restart the mordred container.
       ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
       ```
 
-1. On the `all-in-one-0` or `mordred-0` node depends on your infrastructure:
-   1. Change to sudo `sudo su`
+1. On the `all-in-one-0` or `mordred-0` node (depending on your infrastructure):
+   1. Switch to sudo `sudo su`
    1. Start the mordred container
 
       ```bash
@@ -66,7 +66,7 @@ root@all-in-one-0:~# cd /docker/mordred/instances/test/logs
 root@all-in-one-0:/docker/mordred/instances/test/logs# cat all.log | grep -v autorefresh | grep git] | tail
 ```
 
-Maybe you don't have permissions to clone the repository or it does not exist.
+This could be due to insufficient permissions to clone the repository or because the repository does not exist.
 
 ### Pontoon session id expired
 

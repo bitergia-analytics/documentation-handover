@@ -96,7 +96,7 @@ Collect data from GitHub including issues, pull requests and repos.
 
 GitHub's REST API considers every pull request an issue, but not every issue is a pull request. For this reason, **issue** category may contain both issues and pull requests.
 
-The `github2:issue` backend is used to collect comment GitHub issues and pull requests. It shares the same raw index as `github:issue` but uses a separate enriched index to store comment-specific information. If they share the same raw index, `collect` must be set to false to prevent duplicate data collection the same for `github2:pull`.
+The `github2:issue` backend is used to collect comments from GitHub issues and pull requests. It shares the same raw index as `github:issue` but uses a separate enriched index to store comment-specific information. If they share the same raw index, `collect` must be set to false to prevent duplicate data collection. The same applies to `github2:pull`.
 
 The `github:repo` backend collects repository-level metadata from GitHub. It collects only the latest repository statistics (stars, forks, watchers, etc.). To track repository evolution over time, this backend must be run periodically.
 

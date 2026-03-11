@@ -1,4 +1,4 @@
-# SortingHat
+# User Management
 
 ## Table of Contents
 
@@ -16,8 +16,7 @@
   - [Index management](#index-management)
     - [Custom indices](#custom-indices)
 
-
-## Managing Users
+## SortingHat
 
 All user management operations require first accessing the SortingHat container:
 
