@@ -1,14 +1,14 @@
 # Troubleshooting
 
 - [Mordred](#mordred)
-    - [Unhealthy mordred container](#unhealthy-mordred-container)
-    - [Missing or outdated data](#missing-or-outdated-data)
-    - [Pontoon session id expired](#pontoon-session-id-expired)
-        - [Obtaining the Session ID](#obtaining-the-session-id)
-        - [Using the Session ID](#using-the-session-id)
-    - [Bugzillarest error](#bugzillarest-error)
-        - [Error in logs](#error-in-logs)
-        - [Workaround](#workaround)
+  - [Unhealthy mordred container](#unhealthy-mordred-container)
+  - [Missing or outdated data](#missing-or-outdated-data)
+  - [Pontoon session id expired](#pontoon-session-id-expired)
+    - [Obtaining the Session ID](#obtaining-the-session-id)
+    - [Using the Session ID](#using-the-session-id)
+  - [Bugzillarest error](#bugzillarest-error)
+    - [Error in logs](#error-in-logs)
+    - [Workaround](#workaround)
 
 ## Mordred
 
@@ -39,22 +39,8 @@ root@bitergio-mordred-1:/docker/mordred/instances/sta/logs# cat all.log | grep E
 2026-03-09 15:30:37,333 - Test - sirmordred.task_manager - ERROR - [git] Exception in Task Manager TransportError(500, 'search_phase_execution_exception', 'node [cv1rlvDRSd6SwWdm8vPJrx] is not available')
 ```
 
-To solve this issue, you can restart the mordred container.
-
-1. On the `control-node`
-   1. stop the mordred container
-
-      ```bash
-      ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
-      ```
-
-1. On the `all-in-one-0` or `mordred-0` node (depending on your infrastructure):
-   1. Switch to sudo `sudo su`
-   1. Start the mordred container
-
-      ```bash
-      docker start mordred_test
-      ```
+To solve this issue, [restart the mordred container safely](operation.md#mordred-restart-container-safely)
+or [manually](operation.md#mordred-restart-container-safely-manual).
 
 ### Missing or outdated data
 
