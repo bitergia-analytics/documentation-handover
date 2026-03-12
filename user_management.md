@@ -9,6 +9,7 @@
     - [Remove User](#remove-user)
     - [Change permissions](#change-permissions)
 - [OpenSearch](#opensearch)
+  - [Roles](#opensearch-roles)
   - [User management](#user-management)
     - [Add user](#add-user-1)
     - [Change password](#change-password)
@@ -103,6 +104,48 @@ Assign a role to a user. Available roles:
 ```
 
 # OpenSearch
+
+## OpenSearch Roles
+
+OpenSearch uses two key concepts for access control:
+
+- **Roles**: Define permissions and access levels to indices, documents, and 
+operations within OpenSearch. Roles specify what actions a user can perform 
+(read, write, delete, etc.) and on which resources.
+
+- **Backend roles**: Labels assigned to users that map them to OpenSearch
+roles. When a user is assigned a backend role (e.g., `<tenant>_user`),
+OpenSearch automatically grants them the permissions associated with the
+corresponding role (e.g., `bap_<tenant>_user_role`).
+
+In the context of BAP (Bitergia Analytics Platform), backend roles act as
+the bridge between user accounts and their functional permissions through
+predefined roles.
+
+The following roles are available for OpenSearch:
+
+- **`bap_<tenant>_user_role`**: Read-only access to tenant data. Users with
+this role can view dashboards and visualizations.
+  - Backed role assigned: `<tenant>_user`
+
+- **`bap_<tenant>_privileged_user_role`**: Read and write access to tenant
+data. Users with this role can view and modify dashboards and visualizations.
+  - Backed role assigned: `<tenant>_privileged_user`
+
+- **`bap_<tenant>_pseudonymize_role`**: Access to pseudonymized data. This
+role allows users to work with data where personal information has been masked.
+  - Backed role assigned: `<tenant>_pseudonymize`
+
+- **`bap_<tenant>_mordred_role`**: Service account role used by the Mordred
+component for data ingestion and processing. This role has the necessary
+permissions to write and update indices.
+
+- **`bap_<tenant>_anonymous_access_role`**: Limited read-only access for
+unauthenticated users. This role is used when anonymous access is enabled.
+  - Backed role assigned: `opendistro_security_anonymous_backendrole`
+
+Replace `<tenant>` with your actual tenant name when assigning these roles.
+
 
 ## User management
 

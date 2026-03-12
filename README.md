@@ -46,12 +46,13 @@ Configuration guide for OpenSearch role-based access control, data privacy, and 
 ### 👤 [User Management](user_management.md)
 Step-by-step instructions for managing users and permissions across the platform.
 
-- **SortingHat User Management**
+- [SortingHat](user_management.md#sortinghat)
   - [Add User](user_management.md#add-user) - Creating new platform users
   - [Add Admin User](user_management.md#add-admin-user) - Creating administrative users
   - [Remove User](user_management.md#remove-user) - User deletion procedures
   - [Change Permissions](user_management.md#change-permissions) - Role and permission management
-- **OpenSearch User Management**
+- [OpenSearch](user_management.md#opensearch)
+  - [Roles](user_management.md#opensearch-roles)
   - [Add User](user_management.md#add-user-1) - OpenSearch user creation
   - [Change Password](user_management.md#change-password) - Password management
   - [Delete User](user_management.md#delete-user) - User removal in OpenSearch
