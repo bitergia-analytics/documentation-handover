@@ -10,12 +10,11 @@ All paths are referenced from the clone of `bap-deployment-toolkit` directory.
 ## Table of Contents
 
 - [Control Node](#control-node)
-  - [OpenTofu](https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/docs/provision.md)
-  - [Ansible](https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/docs/deployment_and_config.md)
 - [Upgrading BAP Versions](#upgrading-bap-versions)
-- [Mordred restart container safely](#mordred-restart-container-safely)
-- [Mordred restart container safely (manual)](#mordred-restart-container-safely-manual)
-- [Mordred update setup.cfg file](#mordred-update-setupcfg-file)
+- [Mordred Operations](#mordred-operations)
+  - [Restarting Mordred Container (Automated)](#restarting-mordred-container-automated)
+  - [Restarting Mordred Container (Manual)](#restarting-mordred-container-manual)
+  - [Updating Mordred Configuration](#updating-mordred-configuration)
 
 ## Control Node
 
@@ -32,10 +31,10 @@ Deployment and configuration management.
 
 ## Upgrading BAP Versions
 
-On the `control-node`, you can upgrade the BAP versions by following these steps
-(all commands must be executed under the `ansible` directory):
+On the `control-node`, you can upgrade BAP versions by following these steps.
+All commands must be executed from the `ansible` directory:
 
-1. Stop mordred container
+1. Stop the Mordred container
 
    ```bash
    ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
@@ -99,9 +98,13 @@ On the `control-node`, you can upgrade the BAP versions by following these steps
    ansible-playbook -i environments/<project>/inventory playbook/all.yml
    ```
 
-## Mordred restart container safely
+## Mordred Operations
 
-1. stop the mordred container
+### Restarting Mordred Container (Automated)
+
+This is the recommended method for restarting the Mordred container:
+
+1. Stop the Mordred container
 
    ```bash
    ansible-playbook -i environments/<project>/inventory playbook/stop_mordred.yml
@@ -139,7 +142,7 @@ On the `control-node`, you can upgrade the BAP versions by following these steps
    ansible-playbook -i environments/<project>/inventory playbook/mordred.yml
    ```
 
-## Mordred restart container safely (manual)
+### Restarting Mordred Container (Manual)
 
 1. On the `control-node`
    1. stop the mordred container
@@ -150,7 +153,7 @@ On the `control-node`, you can upgrade the BAP versions by following these steps
 
 1. On the `all-in-one-0` or `mordred-0` node (depending on your infrastructure):
    1. Switch to sudo `sudo su`
-   1. Update `setup.cfg`
+   1. Fetch updated `setup.cfg`
 
       ```bash
       cd /docker/mordred/setups
@@ -169,13 +172,12 @@ On the `control-node`, you can upgrade the BAP versions by following these steps
       docker start <container_name>
       ```
 
-## Mordred update setup.cfg file
+### Updating Mordred Configuration
 
-When you update the `setup.cfg` file, you need to [restart the mordred container safely](#mordred-restart-container-safely).
-But if `mordred-0` or `all-in-one-0` machine does not have permission to pull
-the changes of `setup.cfg` repository follow [these steps](#mordred-restart-container-safely-manual).
+When you update the `setup.cfg` file, you need to [restart the Mordred container](#restarting-mordred-container-automated).
+If the `mordred-0` or `all-in-one-0` machine lacks permission to pull
+changes from the `setup.cfg` repository, follow the [manual restart procedure](#restarting-mordred-container-manual).
 
-> **IMPORTANT**: When you update the `setup.cfg` file, you must restart the
-mordred container, but if you update the `projects.json` file, mordred will
-automatically pull the changes and update the index, so you don't need to
-restart the mordred container.
+> **IMPORTANT**: 
+> - When you update the `setup.cfg` file, you **must** restart the Mordred container.
+> - When you update the `projects.json` file, Mordred will automatically detect the changes and update the index, so no container restart is required.

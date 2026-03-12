@@ -14,23 +14,19 @@ The Bitergia Analytics Platform (BAP) is a software development analytics soluti
 - **Orchestration**: Mordred coordinates the entire data pipeline
 - **Visualization**: OpenSearch Dashboards presents interactive analytics and reports
 
-
 **Deployment Model:**
 The platform runs on cloud infrastructure (GCP, AWS) with Infrastructure as Code (OpenTofu) and configuration management (Ansible), enabling reproducible and scalable deployments across different environments.
 
 For a complete architectural overview, see [BAP Architecture Documentation](https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/docs/architecture_overview.md)
-
 
 ## 📚 Documentation Index
 
 ### 🚀 [Operation Guide](operation.md)
 Complete infrastructure management guide for the Bitergia Analytics Platform.
 
-- **Control Node Management**
-  - [OpenTofu](operation.md#opentofu) - Infrastructure provisioning with OpenTofu
-  - [Ansible](operation.md#ansible) - Deployment and configuration management
-- **Mordred Operations**
-  - [Mordred Management](operation.md#mordred) - Container management and configuration updates
+- [Control Node](operation.md#control-node) - Infrastructure management overview
+- [Upgrading BAP Versions](operation.md#upgrading-bap-versions) - Platform version management
+- [Mordred Operations](operation.md#mordred-operations) - Container management and configuration
 
 ### ⚙️ [Mordred Configuration](mordred_configuration.md)
 Detailed guide for configuring GrimoireLab data collection and analysis.
@@ -42,10 +38,10 @@ Detailed guide for configuring GrimoireLab data collection and analysis.
   - [GitHub](mordred_configuration.md#github) - GitHub issues, pulls, and repository data collection
 
 ### 🔍 [OpenSearch Configuration](opensearch_configuration.md)
-Configuration guide for OpenSearch indices
+Configuration guide for OpenSearch role-based access control, data privacy, and indices management.
 
-- [Custom indices](opensearch_configuration.md#custom-indices) - Managing OpenSearch indices
-
+- [Pseudoanonymization](opensearch_configuration.md#pseudoanonymization) - Role-based data privacy and field masking configuration
+- [Custom indices](opensearch_configuration.md#custom-indices) - Managing tenant-specific custom indices
 
 ### 👤 [User Management](user_management.md)
 Step-by-step instructions for managing users and permissions across the platform.
@@ -71,7 +67,6 @@ Guides and tutorials for end users working with SortingHat and OpenSearch.
     - [Explore Interface](https://bap.bitergia.com/advanced/explore/) - Interactive data exploration
     - [OpenSearch API Tutorial](https://bap.bitergia.com/advanced/opensearch-api-tutorial/) - Working with the OpenSearch API
     - [SQL Queries](https://bap.bitergia.com/advanced/sql/) - Using SQL to query data
-
 
 ### 🔧 [Troubleshooting Guide](troubleshooting.md)
 Solutions for common issues and error scenarios in the BAP environment.
