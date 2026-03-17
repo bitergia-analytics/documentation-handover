@@ -10,6 +10,7 @@ All paths are referenced from the clone of `bap-deployment-toolkit` directory.
 ## Table of Contents
 
 - [Control Node](#control-node)
+  - [Configuration Parameters](#configuration-parameters)
 - [Upgrading BAP Versions](#upgrading-bap-versions)
 - [Mordred Operations](#mordred-operations)
   - [Restarting Mordred Container (Automated)](#restarting-mordred-container-automated)
@@ -28,6 +29,20 @@ this node. Here are the key components for managing the Control Node:
 Infrastructure provisioning.
 - [Ansible](https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/docs/deployment_and_config.md):
 Deployment and configuration management.
+
+### Configuration Parameters
+
+All configuration parameters are in `environments/<project>/inventory/vars.yml`
+for more details, see [BAP Configuration Documentation](https://github.com/bitergia-analytics/bap-deployment-toolkit/blob/main/docs/deployment_and_config.md#bap-configuration)
+
+Some examples of configuration parameters include:
+
+- Admin user/password credentials
+  - OpenSearch
+  - MariaDB
+  - SortingHat
+  - Redis
+- All other BAP configuration options
 
 ## Upgrading BAP Versions
 
