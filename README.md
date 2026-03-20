@@ -57,17 +57,13 @@ Step-by-step instructions for managing users and permissions across the platform
   - [Change Password](user_management.md#change-password) - Password management
   - [Delete User](user_management.md#delete-user) - User removal in OpenSearch
 
-### 📖 [End-User Documentation](https://bap.bitergia.com/)
+### 📖 [End-User Documentation](end-user-doc/README.md)
 Guides and tutorials for end users working with SortingHat and OpenSearch.
 
-- **SortingHat**
-    - [Affiliations Management](https://bap.bitergia.com/advanced/affiliations/) - Managing organization affiliations
-    - [Identity Management](https://bap.bitergia.com/advanced/identities/) - Working with contributor identities
-    - [SortingHat API Tutorial](https://bap.bitergia.com/advanced/sortinghat_api_tutorial/) - Using the SortingHat API
-- **OpenSearch**
-    - [Explore Interface](https://bap.bitergia.com/advanced/explore/) - Interactive data exploration
-    - [OpenSearch API Tutorial](https://bap.bitergia.com/advanced/opensearch-api-tutorial/) - Working with the OpenSearch API
-    - [SQL Queries](https://bap.bitergia.com/advanced/sql/) - Using SQL to query data
+- [New to Bitergia Analytics Platform?](end-user-doc/README.md#new-to-bitergia-analytics-platform) - Getting started guides and tutorials
+- [Supported Data Sets](end-user-doc/README.md#supported-data-sets) - Integration guides for all data sources  
+- [Advanced Instructions](end-user-doc/README.md#advanced-instructions) - Power user features and API documentation
+- [Reference](end-user-doc/README.md#reference) - Data models, terminology, and technical references
 
 ### 🔧 [Troubleshooting Guide](troubleshooting.md)
 Solutions for common issues and error scenarios in the BAP environment.
@@ -81,6 +77,11 @@ Solutions for common issues and error scenarios in the BAP environment.
   - [Bugzillarest Error](troubleshooting.md#bugzillarest-error) - Resolving BugzillaREST API collection failures
     - [Error in Logs](troubleshooting.md#error-in-logs)
     - [Workaround](troubleshooting.md#workaround)
+- [End user FAQ](end-user-doc/new/faq.md)
+  - [Identities](end-user-doc/new/faq.md#identities) - Questions about identity and affiliation management
+  - [Data Sources Management](end-user-doc/new/faq.md#data-sources-management) - Common questions about adding repositories and data sources
+  - [Dashboards](end-user-doc/new/faq.md#dashboards) - Troubleshooting visualizations and dashboard problems
+  - [Metrics](end-user-doc/new/faq.md#metrics) - Understanding and interpreting metrics data
 
 ## 🔗 External Resources
 
@@ -88,4 +89,3 @@ Solutions for common issues and error scenarios in the BAP environment.
 - [SirMordred Backends](https://github.com/chaoss/grimoirelab-sirmordred) - GrimoireLab orchestrator documentation
 - [Bitergia Backends](https://github.com/bitergia-analytics/bitergia-analytics-elk-backends) - Custom data source backends
 - [OpenSearch](https://docs.opensearch.org/) - Official OpenSearch documentation
-- [BAP End-User Documentation](https://bap.bitergia.com/) - Comprehensive guides for platform users
