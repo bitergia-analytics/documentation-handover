@@ -16,6 +16,10 @@ All paths are referenced from the clone of `bap-deployment-toolkit` directory.
   - [Restarting Mordred Container (Automated)](#restarting-mordred-container-automated)
   - [Restarting Mordred Container (Manual)](#restarting-mordred-container-manual)
   - [Updating Mordred Configuration](#updating-mordred-configuration)
+- [Source synchronization](#source-synchronization)
+  - [ReposSync](#repossync)
+  - [Synchronize metadata](#synchronize-metadata)
+  - [Synchronize removed repositories](#synchronize-removed-repositories)
 
 ## Control Node
 
@@ -196,3 +200,25 @@ changes from the `setup.cfg` repository, follow the [manual restart procedure](#
 > **IMPORTANT**: 
 > - When you update the `setup.cfg` file, you **must** restart the Mordred container.
 > - When you update the `projects.json` file, Mordred will automatically detect the changes and update the index, so no container restart is required.
+
+## Source synchronization
+
+### ReposSync
+
+ReposSync is a tool for synchronizing project repositories defined in the
+`projects.json` file with upstream platforms (GitHub, GitLab, Gerrit).
+
+https://gitlab.com/Bitergia/devops/sources-utils/-/blob/master/generic/README.md?ref_type=heads#repossyncpy
+
+### Synchronize metadata
+
+Synchronize project metadata fields from the `projects.json` file with OpenSearch indexes.
+
+https://gitlab.com/Bitergia/devops/sources-utils/-/blob/master/generic/README.md?ref_type=heads#project_metadatapy
+
+### Synchronize removed repositories
+
+Run synchronization after removing repositories from `projects.json` to ensure
+they are also removed from OpenSearch indexes.
+
+https://gitlab.com/Bitergia/devops/sources-utils/-/blob/master/generic/README.md?ref_type=heads#remove_repospy
