@@ -27,6 +27,7 @@ Complete infrastructure management guide for the Bitergia Analytics Platform.
 - [Control Node](operation.md#control-node) - Infrastructure management overview
 - [Upgrading BAP Versions](operation.md#upgrading-bap-versions) - Platform version management
 - [Mordred Operations](operation.md#mordred-operations) - Container management and configuration
+- [Source synchronization](operation.md#source-synchronization) - Sources synchronization
 
 ### ⚙️ [Mordred Configuration](mordred_configuration.md)
 Detailed guide for configuring GrimoireLab data collection and analysis.
