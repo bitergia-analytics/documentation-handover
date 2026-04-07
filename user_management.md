@@ -8,6 +8,7 @@
     - [Add admin user](#add-admin-user)
     - [Remove User](#remove-user)
     - [Change permissions](#change-permissions)
+    - [Change password](#change-password)
 - [OpenSearch](#opensearch)
   - [Roles](#opensearch-roles)
   - [User management](#user-management)
@@ -101,6 +102,25 @@ Assign a role to a user. Available roles:
 #### For multitenant mode
 ```bash
 /opt/venv/bin/sortinghat-admin set-user-permissions <user> <role> --tenant <tenant>
+```
+
+### Change password
+
+Users can change their own password through the SortingHat UI. However, if an administrator
+needs to reset a user's password, they can do so through the Django shell.
+
+This process is the same for both single-tenant and multitenant deployments.
+
+```bash
+export DJANGO_SETTINGS_MODULE=sortinghat.config.settings
+/opt/venv/bin/django-admin shell
+```
+
+```python
+from django.contrib.auth.models import User
+user = User.objects.get(username="<user>")
+user.set_password("<new_password>")
+user.save()
 ```
 
 # OpenSearch
