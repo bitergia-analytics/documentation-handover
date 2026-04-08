@@ -192,7 +192,8 @@ you typically use an `update_by_query`.
 OpenSearch Dashboards provides an applet on its web interface called **Dev Tools**.
 It is in the group "Management" of the dropdown menu on the top-left corner of the window.
 
-For example, changes in project names can be updated using this query:
+For example, changes in project names can be updated using
+[update_by_query](https://docs.opensearch.org/latest/api-reference/document-apis/update-by-query):
 ```json
 POST <INDEX ALIAS>/_update_by_query?wait_for_completion=false
 {
