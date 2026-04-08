@@ -52,6 +52,7 @@ Step-by-step instructions for managing users and permissions across the platform
   - [Add Admin User](user_management.md#add-admin-user) - Creating administrative users
   - [Remove User](user_management.md#remove-user) - User deletion procedures
   - [Change Permissions](user_management.md#change-permissions) - Role and permission management
+  - [Change Password](user_management.md#change-password) - Password management for SortingHat users
 - [OpenSearch](user_management.md#opensearch)
   - [Roles](user_management.md#opensearch-roles)
   - [Add User](user_management.md#add-user-1) - OpenSearch user creation
