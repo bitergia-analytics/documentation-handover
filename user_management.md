@@ -8,6 +8,7 @@
     - [Add admin user](#add-admin-user)
     - [Remove User](#remove-user)
     - [Change permissions](#change-permissions)
+    - [List users and roles](#list-users-and-roles)
     - [Change password](#change-password)
 - [OpenSearch](#opensearch)
   - [Roles](#opensearch-roles)
@@ -102,6 +103,50 @@ Assign a role to a user. Available roles:
 #### For multitenant mode
 ```bash
 /opt/venv/bin/sortinghat-admin set-user-permissions <user> <role> --tenant <tenant>
+```
+
+### List users and roles
+
+List all SortingHat users and their assigned roles.
+
+```bash
+export DJANGO_SETTINGS_MODULE=sortinghat.config.settings
+/opt/venv/bin/django-admin shell
+```
+
+#### For single-tenant mode
+
+Copy and paste the following code snippet to list all users and their roles:
+
+```python
+from django.contrib.auth import get_user_model
+
+for user in get_user_model().objects.prefetch_related('groups').all():
+    if user.is_superuser:
+        group_id = 'admin'
+    else:
+        group_id = user.groups.values_list('name', flat=True).first() or 'no_group'
+    
+    print(f"{user.username}: {group_id}")
+```
+
+#### For multitenant mode
+
+Copy and paste the following code snippet to list all users, their roles:
+
+```python
+from django.contrib.auth import get_user_model
+
+for user in get_user_model().objects.all():
+    if user.is_superuser:
+        permission_group = 'admin'
+    else:
+        try:
+            tenant_record = Tenant.objects.filter(user=user).first()
+            permission_group = tenant_record.perm_group if tenant_record else None
+        except Tenant.DoesNotExist:
+            permission_group = None
+    print(f"{user.username}: {permission_group}")
 ```
 
 ### Change password
