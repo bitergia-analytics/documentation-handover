@@ -1,6 +1,6 @@
 # Mordred configuration
 
-Mordred is the orchestrator component of GrimoireLab that coordinates the entire
+[Mordred](https://github.com/chaoss/grimoirelab-sirmordred) is the orchestrator component of GrimoireLab that coordinates the entire
 data pipeline for software development analytics. It manages the collection of raw
 data from various sources (Git repositories, GitHub issues, pull requests, etc.),
 enriches this data with additional metrics, and uses SortingHat to unify contributor
@@ -27,6 +27,8 @@ The configuration file is organized into multiple sections:
 - **[sortinghat]**: Identity configuration
 - **[phases]**: Enable/disable pipeline stages (collection, enrichment, identities)
 - **Backend sections**: One per datasource (e.g., [git], [github]) with indices and parameters. Each datasource could contain several studies that must be defined.
+
+See the [related section in the GrimoireLab tutorial](https://chaoss.github.io/grimoirelab-tutorial/docs/getting-started/setup-cfg).
 
 ## Projects file
 
@@ -55,6 +57,10 @@ Then your `setup.cfg` must contain matching sections:
 [github:issue]
 # github issue configuration
 ```
+
+See:
+ - The [related section in the GrimoireLab tutorial](https://chaoss.github.io/grimoirelab-tutorial/docs/getting-started/projects-json/).
+ - Some [topics related to the management of this file](https://github.com/bitergia-analytics/documentation-handover/blob/main/end-user-doc/new/faq.md#data-sources-management).
 
 ## Data source examples
 
@@ -168,3 +174,52 @@ The `github:repo` backend collects repository-level metadata from GitHub. It col
   }
   ```
 
+
+## Utilities related to the mainteinance of the project file
+
+Bitergia has been collecting [utility scripts](https://gitlab.com/Bitergia/devops/sources-utils)
+for a number of internal usage needs related to the mainteinance of the project file.
+
+ 
+## Applying retroactive modifications
+
+Usually Mordred runs a neverending loop, so changes in the projects file apply
+to the data loaded from the next loop on.
+
+If you want to apply them retroactively to the previously loaded data,
+you typically use an `update_by_query`.
+
+OpenSearch Dashboards provides an applet on its web interface called **Dev Tools**.
+It is in the group "Management" of the dropdown menu on the top-left corner of the window.
+
+For example, changes in project names can be updated using
+[update_by_query](https://docs.opensearch.org/latest/api-reference/document-apis/update-by-query):
+```json
+POST <INDEX ALIAS>/_update_by_query?wait_for_completion=false
+{
+  "query": {
+    "match": {
+      "project": "<OLD project name>"
+    }
+  },
+  "script": {
+    "source": "ctx._source.project = params.new; ctx._source.project_1 = params.new",
+    "lang": "painless",
+    "params": {
+      "new": "<NEW project name>"
+    }
+  }
+}
+```
+
+Tips:
+
+When available, the `_all_enriched` alias will cover most, if not all of the indexes
+except the results of studies, such as `_all_onion` or `_git_areas_of_code`.
+
+Send `GET _tasks/<ID>` to watch the task run (status).
+
+Typically, you do this while Mordred is running in the background.
+Note that the running Mordred is still working according to the old configuration,
+so it might still smear the data. The most pragmatic solution is to wait for the
+current cycle to end and then run query.
