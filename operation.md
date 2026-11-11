@@ -197,6 +197,35 @@ When you update the `setup.cfg` file, you need to [restart the Mordred container
 If the `mordred-0` or `all-in-one-0` machine lacks permission to pull
 changes from the `setup.cfg` repository, follow the [manual restart procedure](#restarting-mordred-container-manual).
 
+### Updating Tokens
+
+API tokens (GitHub, GitLab, etc.) are defined in the `setup.cfg` file
+(e.g. `api-token = [xxxx, yyyy]`). **Do not edit the `setup.cfg` directly on
+the Mordred machine.** The machine's `setup.cfg` is a checkout of the
+repository: every time the containers are updated (or the cron job runs
+`git pull`), the local file is replaced with the one from the repository, and
+any token changed only on the machine is lost.
+
+To update a token:
+
+1. Edit the `setup.cfg` in the repository and push the change. If the Mordred
+   machine was deployed with the Ansible playbooks, the repository is the one
+   defined in the `mordred_setups_repo_url` variable of your environment, so
+   that is the repository you must update.
+1. On the target machine, fetch the changes:
+
+   ```bash
+   sudo su
+   cd /docker/mordred/setups
+   git pull origin main
+   ```
+
+   The repository is also pulled periodically by a cron job, but fetching
+   manually applies the change immediately.
+1. [Restart the Mordred container](#restarting-mordred-container-automated)
+   (or use the [manual procedure](#restarting-mordred-container-manual)) so it
+   loads the new tokens.
+
 > **IMPORTANT**: 
 > - When you update the `setup.cfg` file, you **must** restart the Mordred container.
 > - When you update the `projects.json` file, Mordred will automatically detect the changes and update the index, so no container restart is required.
